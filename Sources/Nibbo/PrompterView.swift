@@ -178,7 +178,7 @@ struct PrompterView: View {
                 .background(Circle().fill(Color.white.opacity(0.14)))
         }
         .buttonStyle(.plain)
-        .help("Quit Cue")
+        .help("Quit Nibbo")
     }
 
     private func iconButton(_ symbol: String, action: @escaping () -> Void) -> some View {

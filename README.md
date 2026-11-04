@@ -1,24 +1,24 @@
-# Cue: a notch teleprompter for macOS
+# Nibbo: a notch teleprompter for macOS
 
-Cue is a small, open-source teleprompter that sits right under your MacBook's camera notch. You can read your script while still looking into the lens, on video calls, in recordings, presentations and live demos.
+Nibbo is a small, open-source teleprompter that sits right under your MacBook's camera notch. You can read your script while still looking into the lens, on video calls, in recordings, presentations and live demos.
 
 <p align="center">
-  <img src="Resources/AppIcon.png" width="128" alt="Cue app icon">
+  <img src="Resources/AppIcon.png" width="128" alt="Nibbo app icon">
 </p>
 
 <p align="center">
-  <a href="https://github.com/jasonzamp/cue/releases/latest/download/Cue.zip">
-    <img src="https://img.shields.io/badge/Download%20Cue%20for%20Mac-%E2%86%93%20Cue.zip-5B6BF9?style=for-the-badge&logo=apple&logoColor=white" alt="Download Cue for Mac">
+  <a href="https://github.com/jasonzamp/nibbo/releases/latest/download/Nibbo.zip">
+    <img src="https://img.shields.io/badge/Download%20Nibbo%20for%20Mac-%E2%86%93%20Nibbo.zip-5B6BF9?style=for-the-badge&logo=apple&logoColor=white" alt="Download Nibbo for Mac">
   </a>
   <br>
-  <sub>Free · macOS 13 or later · Apple Silicon and Intel · <a href="https://github.com/jasonzamp/cue/releases">all releases</a></sub>
+  <sub>Free · macOS 13 or later · Apple Silicon and Intel · <a href="https://github.com/jasonzamp/nibbo/releases">all releases</a></sub>
 </p>
 
 ## Why I built this
 
 I'm a consultant, and a big part of my week is presenting: client meetings, workshops, demos and video calls, often back to back. I wanted to land my key points accurately without glancing at a second screen or looking down at notes, because that breaks eye contact and makes you look less sure of yourself. The teleprompters I tried were either overkill, with extra hardware or separate apps that cover the screen, or they showed up the moment I shared my screen.
 
-So I built Cue, a tiny teleprompter that lives right under my MacBook's camera. My eyes stay on the lens, and the audience sees my slides while only I see my notes. I built it with Claude Code, partly to find out how far AI coding tools can take an idea, from a rough concept to a working native app.
+So I built Nibbo, a tiny teleprompter that lives right under my MacBook's camera. My eyes stay on the lens, and the audience sees my slides while only I see my notes. I built it with Claude Code, partly to find out how far AI coding tools can take an idea, from a rough concept to a working native app.
 
 ## Features
 
@@ -48,40 +48,40 @@ Mouse: click the text to play or pause, scroll to move manually, and hover to sh
 
 ## Install
 
-Cue runs on Macs only (macOS 13 Ventura or later). It doesn't run on Windows or Linux.
+Nibbo runs on Macs only (macOS 13 Ventura or later). It doesn't run on Windows or Linux.
 
-1. **Download** [Cue.zip](https://github.com/jasonzamp/cue/releases/latest/download/Cue.zip) and double-click it to unzip.
-2. **Drag `Cue.app` into your Applications folder.**
-3. **Open it the first time.** Cue isn't signed with a paid Apple Developer ID, so macOS blocks the first launch:
-   - **macOS 15 Sequoia or later:** double-click Cue and click **Done** on the warning. Then open **System Settings → Privacy & Security**, scroll down to *"Cue" was blocked…*, click **Open Anyway** and confirm.
-   - **macOS 13–14:** right-click (or Control-click) Cue → **Open** → **Open**.
+1. **Download** [Nibbo.zip](https://github.com/jasonzamp/nibbo/releases/latest/download/Nibbo.zip) and double-click it to unzip.
+2. **Drag `Nibbo.app` into your Applications folder.**
+3. **Open it the first time.** Nibbo isn't signed with a paid Apple Developer ID, so macOS blocks the first launch:
+   - **macOS 15 Sequoia or later:** double-click Nibbo and click **Done** on the warning. Then open **System Settings → Privacy & Security**, scroll down to *"Nibbo" was blocked…*, click **Open Anyway** and confirm.
+   - **macOS 13–14:** right-click (or Control-click) Nibbo → **Open** → **Open**.
 
    You only need to do this once.
-4. **Look at the top of your screen.** Cue lives in the menu bar (there's no Dock icon), and the prompter appears under the camera. The Script & Settings window opens on first launch so you can paste your script.
-5. **Voice mode (optional).** The first time you turn it on, macOS asks for microphone access. Cue only measures how loud the room is, and audio is never recorded or sent anywhere.
+4. **Look at the top of your screen.** Nibbo lives in the menu bar (there's no Dock icon), and the prompter appears under the camera. The Script & Settings window opens on first launch so you can paste your script.
+5. **Voice mode (optional).** The first time you turn it on, macOS asks for microphone access. Nibbo only measures how loud the room is, and audio is never recorded or sent anywhere.
 
 Prefer the Terminal? After moving it to Applications, this clears the download flag instead of step 3:
 
 ```bash
-xattr -dr com.apple.quarantine /Applications/Cue.app
+xattr -dr com.apple.quarantine /Applications/Nibbo.app
 ```
 
-**Want it on your Desktop or Dock?** Drag Cue from Applications onto the Dock, or hold ⌥⌘ while dragging it to the Desktop to make an alias. To start it at login, add it under System Settings → General → Login Items.
+**Want it on your Desktop or Dock?** Drag Nibbo from Applications onto the Dock, or hold ⌥⌘ while dragging it to the Desktop to make an alias. To start it at login, add it under System Settings → General → Login Items.
 
-**Uninstall:** quit Cue (✕ on the prompter, or menu bar icon → Quit), then move `Cue.app` to the Bin. Your script and settings are kept in `~/Library/Preferences/io.github.jasonzamp.cue.plist`, so delete that file too if you want them gone.
+**Uninstall:** quit Nibbo (✕ on the prompter, or menu bar icon → Quit), then move `Nibbo.app` to the Bin. Your script and settings are kept in `~/Library/Preferences/io.github.jasonzamp.nibbo.plist`, so delete that file too if you want them gone.
 
 ## Build from source
 
 You need macOS 13 or later and the Xcode Command Line Tools (`xcode-select --install`).
 
 ```bash
-git clone https://github.com/jasonzamp/cue.git
-cd cue
-./build.sh          # builds a universal Cue.app (Apple Silicon + Intel)
-open Cue.app
+git clone https://github.com/jasonzamp/nibbo.git
+cd nibbo
+./build.sh          # builds a universal Nibbo.app (Apple Silicon + Intel)
+open Nibbo.app
 ```
 
-`./build.sh --zip` also packages `dist/Cue.zip`, the file attached to each GitHub release. The app icon is drawn in code: `swift scripts/make-icon.swift` regenerates `Resources/AppIcon.icns`.
+`./build.sh --zip` also packages `dist/Nibbo.zip`, the file attached to each GitHub release. The app icon is drawn in code: `swift scripts/make-icon.swift` regenerates `Resources/AppIcon.icns`.
 
 ## How it works
 

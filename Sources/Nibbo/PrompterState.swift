@@ -55,13 +55,13 @@ final class PrompterState: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     static let sample = """
-    Welcome to Cue.
+    Welcome to Nibbo.
 
     This teleprompter sits right under your camera, so you can read your script while keeping natural eye contact.
 
     Open the editor with Control-Option-E and paste your own script. Press Control-Option-Space to start and pause.
 
-    Turn on voice mode with Control-Option-M and Cue will pause whenever you stop talking.
+    Turn on voice mode with Control-Option-M and Nibbo will pause whenever you stop talking.
     """
 
     init() {

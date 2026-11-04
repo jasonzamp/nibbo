@@ -43,7 +43,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             DispatchQueue.main.async {
                 self.state.voiceMode = false
                 let alert = NSAlert()
-                alert.messageText = "Cue needs microphone access for voice mode"
+                alert.messageText = "Nibbo needs microphone access for voice mode"
                 alert.informativeText = "Turn it on in System Settings → Privacy & Security → Microphone, then try again."
                 alert.runModal()
             }
@@ -67,7 +67,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     // MARK: Menu bar icon
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem.button?.image = NSImage(systemSymbolName: "text.aligncenter", accessibilityDescription: "Cue")
+        statusItem.button?.image = NSImage(systemSymbolName: "text.aligncenter", accessibilityDescription: "Nibbo")
         let menu = NSMenu()
         menu.delegate = self
         statusItem.menu = menu
@@ -83,7 +83,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         add(menu, prompter.panel.isVisible ? "Hide Prompter  ⌃⌥H" : "Show Prompter  ⌃⌥H", #selector(toggleVisible))
         add(menu, "Snap Under Notch", #selector(snap))
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Quit Cue", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        menu.addItem(withTitle: "Quit Nibbo", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
     }
 
     private func add(_ menu: NSMenu, _ title: String, _ action: Selector) {
@@ -104,7 +104,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 1060, height: 580),
                                   styleMask: [.titled, .closable, .resizable, .miniaturizable],
                                   backing: .buffered, defer: false)
-            window.title = "Cue — Script & Settings"
+            window.title = "Nibbo — Script & Settings"
             window.contentViewController = NSHostingController(rootView: editor)
             window.isReleasedWhenClosed = false
             window.center()
@@ -120,7 +120,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         let appItem = NSMenuItem()
         let appMenu = NSMenu()
-        appMenu.addItem(withTitle: "Quit Cue", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(withTitle: "Quit Nibbo", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appItem.submenu = appMenu
         main.addItem(appItem)
 

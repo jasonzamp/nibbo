@@ -1,6 +1,6 @@
 .build/
 .swiftpm/
-Cue.app/
+Nibbo.app/
 *.xcodeproj/
 xcuserdata/
 .DS_Store

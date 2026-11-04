@@ -2,9 +2,9 @@
 import PackageDescription
 
 let package = Package(
-    name: "Cue",
+    name: "Nibbo",
     platforms: [.macOS(.v13)],
     targets: [
-        .executableTarget(name: "Cue", path: "Sources/Cue")
+        .executableTarget(name: "Nibbo", path: "Sources/Nibbo")
     ]
 )

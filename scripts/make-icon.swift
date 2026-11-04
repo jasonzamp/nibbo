@@ -1,4 +1,4 @@
-// Draws Cue's app icon and writes Resources/AppIcon.icns.
+// Draws Nibbo's app icon and writes Resources/AppIcon.icns.
 // Run from the repo root: swift scripts/make-icon.swift
 import AppKit
 
