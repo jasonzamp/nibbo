@@ -2,7 +2,15 @@ import SwiftUI
 
 private struct ContentHeightKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = nextValue() }
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = max(value, nextValue()) }
+}
+
+/// Where each non-empty line of the script starts, keyed by its line index.
+private struct LineOffsetsKey: PreferenceKey {
+    static var defaultValue: [Int: CGFloat] = [:]
+    static func reduce(value: inout [Int: CGFloat], nextValue: () -> [Int: CGFloat]) {
+        value.merge(nextValue()) { $1 }
+    }
 }
 
 /// Black panel with square top corners when docked under the notch,
@@ -30,10 +38,12 @@ struct PanelShape: Shape {
 struct PrompterView: View {
     @ObservedObject var state: PrompterState
     var onDrag: (_ ended: Bool) -> Void
+    var onOpenSettings: () -> Void
     @State private var hovering = false
 
     /// Where the line you're currently reading sits, as a fraction of the visible height.
-    private let readingLine: CGFloat = 0.28
+    /// Kept small so most of the panel shows upcoming text; the area above is a short fade strip.
+    private let readingLine: CGFloat = 0.05
 
     var body: some View {
         VStack(spacing: 0) {
@@ -46,6 +56,11 @@ struct PrompterView: View {
             .overlay(alignment: .topLeading) { statusDot.padding(10) }
         }
         .background(PanelShape(top: state.topInset > 0 ? 0 : 14, bottom: 18).fill(Color.black))
+        .overlay(alignment: .topTrailing) { // in the very corner, beside the notch rather than below it
+            if hovering {
+                closeButton.padding(5).transition(.opacity)
+            }
+        }
         .overlay(alignment: .bottom) { progressBar }
         .overlay(alignment: .bottom) {
             if hovering {
@@ -68,22 +83,39 @@ struct PrompterView: View {
             : state.script
     }
 
+    /// One Text per line so the editor can jump to, and highlight, a specific paragraph.
     private func textLayer(in size: CGSize) -> some View {
-        Text(displayText)
-            .font(state.font)
-            .foregroundColor(.white)
-            .multilineTextAlignment(.center)
-            .lineSpacing(CGFloat(state.fontSize) * 0.3)
-            .frame(width: max(size.width - 40, 60))
-            .fixedSize(horizontal: false, vertical: true)
-            .background(GeometryReader { g in
-                Color.clear.preference(key: ContentHeightKey.self, value: g.size.height)
-            })
-            .offset(y: size.height * readingLine - state.offset)
-            .frame(width: size.width, height: size.height, alignment: .top)
-            .clipped()
-            .mask(fade)
-            .onPreferenceChange(ContentHeightKey.self) { state.contentHeight = $0 }
+        let spacing = CGFloat(state.fontSize) * 0.3
+        let lines = displayText.components(separatedBy: "\n")
+        return VStack(spacing: spacing) {
+            ForEach(Array(lines.enumerated()), id: \.offset) { i, line in
+                let isBlank = line.trimmingCharacters(in: .whitespaces).isEmpty
+                Text(isBlank ? " " : line)
+                    .font(state.font)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(spacing)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .background(GeometryReader { g in
+                        Color.clear.preference(key: LineOffsetsKey.self,
+                                               value: isBlank ? [:] : [i: g.frame(in: .named("script")).minY])
+                    })
+            }
+        }
+        .frame(width: max(size.width - 40, 60))
+        .fixedSize(horizontal: false, vertical: true)
+        .coordinateSpace(name: "script")
+        .background(GeometryReader { g in
+            Color.clear.preference(key: ContentHeightKey.self, value: g.size.height)
+        })
+        .offset(y: size.height * readingLine - state.offset)
+        .frame(width: size.width, height: size.height, alignment: .top)
+        .clipped()
+        .mask(fade)
+        .onPreferenceChange(ContentHeightKey.self) { state.contentHeight = $0 }
+        .onPreferenceChange(LineOffsetsKey.self) { offsets in
+            if state.lineOffsets != offsets { state.lineOffsets = offsets }
+        }
     }
 
     /// Lines you've already read dim out; upcoming lines fade in at the bottom.
@@ -130,10 +162,23 @@ struct PrompterView: View {
                 .foregroundColor(.white.opacity(0.7))
             iconButton("hare.fill") { state.faster() }
             iconButton(state.voiceMode ? "mic.fill" : "mic.slash.fill") { state.voiceMode.toggle() }
+            iconButton("gearshape.fill") { onOpenSettings() }
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
         .background(Capsule().fill(Color.white.opacity(0.14)))
+    }
+
+    private var closeButton: some View {
+        Button { NSApp.terminate(nil) } label: {
+            Image(systemName: "xmark")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundColor(.white.opacity(0.85))
+                .frame(width: 20, height: 20)
+                .background(Circle().fill(Color.white.opacity(0.14)))
+        }
+        .buttonStyle(.plain)
+        .help("Quit Cue")
     }
 
     private func iconButton(_ symbol: String, action: @escaping () -> Void) -> some View {

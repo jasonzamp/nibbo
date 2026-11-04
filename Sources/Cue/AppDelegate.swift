@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupMainMenu()
         prompter = PrompterPanelController(state: state)
+        prompter.onOpenSettings = { [weak self] in self?.openEditor() }
         setupStatusItem()
         setupHotKeys()
 
@@ -24,6 +25,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             .store(in: &cancellables)
 
         if state.script == PrompterState.sample { openEditor() } // first launch
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        state.saveToHistory() // catch edits made just before quitting
     }
 
     // MARK: Voice
@@ -96,7 +101,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func openEditor() {
         if editorWindow == nil {
             let editor = EditorView(state: state, onSnap: { [weak self] in self?.prompter.snapToNotch() })
-            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 820, height: 580),
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 1060, height: 580),
                                   styleMask: [.titled, .closable, .resizable, .miniaturizable],
                                   backing: .buffered, defer: false)
             window.title = "Cue — Script & Settings"

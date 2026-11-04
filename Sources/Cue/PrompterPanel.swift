@@ -43,6 +43,7 @@ final class FirstMouseHostingView<Content: View>: NSHostingView<Content> {
 final class PrompterPanelController: NSObject, NSWindowDelegate {
     let panel: PrompterPanel
     private let state: PrompterState
+    var onOpenSettings: (() -> Void)?
     private var cancellables = Set<AnyCancellable>()
     private var applyingFrame = false
     private var dragStartMouse: NSPoint?
@@ -53,7 +54,9 @@ final class PrompterPanelController: NSObject, NSWindowDelegate {
         panel = PrompterPanel(contentRect: NSRect(x: 0, y: 0, width: state.panelWidth, height: state.panelHeight))
         super.init()
 
-        let root = PrompterView(state: state, onDrag: { [weak self] ended in self?.handleDrag(ended: ended) })
+        let root = PrompterView(state: state,
+                                onDrag: { [weak self] ended in self?.handleDrag(ended: ended) },
+                                onOpenSettings: { [weak self] in self?.onOpenSettings?() })
         panel.contentView = FirstMouseHostingView(rootView: root)
         panel.delegate = self
         panel.onScroll = { [weak state] delta in state?.nudge(by: delta) }
