@@ -2,7 +2,11 @@
 
 Cue is a small, open-source teleprompter that sits right under your MacBook's camera notch. You can read your script while still looking into the lens, on video calls, in recordings, presentations and live demos.
 
-> Inspired by [Moody](https://moodyteleprompter.com/). This is an independent build from scratch, made as a learning and portfolio project.
+## Why I built this
+
+I'm a consultant, and a big part of my week is presenting: client meetings, workshops, demos and video calls, often back to back. I wanted to land my key points accurately without glancing at a second screen or looking down at notes, because that breaks eye contact and makes you look less sure of yourself. The teleprompters I tried were either overkill, with extra hardware or separate apps that cover the screen, or they showed up the moment I shared my screen.
+
+So I built Cue, a tiny teleprompter that lives right under my MacBook's camera. My eyes stay on the lens, and the audience sees my slides while only I see my notes. I built it with Claude Code, partly to find out how far AI coding tools can take an idea, from a rough concept to a working native app.
 
 ## Features
 
