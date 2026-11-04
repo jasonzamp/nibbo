@@ -27,7 +27,7 @@ I'm a consultant, and a big part of my week is presenting: client meetings, work
 
 So I built Nibbo, a tiny teleprompter that lives right under my MacBook's camera. My eyes stay on the lens, and the audience sees my slides while only I see my notes. I built it with Claude Code, partly to find out how far AI coding tools can take an idea, from a rough concept to a working native app.
 
-## Screenshots
+## Made for presenting
 
 <p align="center">
   <a href="screenshots/2-only-you-see-it.png"><img src="screenshots/2-only-you-see-it.png" width="32%" alt="Only you see your notes: your screen shows the prompter, the audience sees only your slides"></a>
