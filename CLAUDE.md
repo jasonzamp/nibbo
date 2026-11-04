@@ -4,7 +4,10 @@ Native macOS menu-bar teleprompter (Swift Package, SwiftUI + AppKit, macOS 13+).
 
 ## Build / run
 - Build check: `swift build`
-- App bundle: `./build.sh` then `open Cue.app` (bundle is needed for the microphone permission prompt)
+- App bundle: `./build.sh` then `open Cue.app` (bundle is needed for the microphone permission prompt). Builds a universal binary (arm64 + x86_64 via two `--triple` builds + `lipo`; multi-arch `swift build` needs full Xcode, which isn't installed)
+- Release zip: `./build.sh --zip` → `dist/Cue.zip`; the README download button points at `releases/latest/download/Cue.zip`, so attach it to each release under exactly that name
+- Icon: `swift scripts/make-icon.swift` regenerates `Resources/AppIcon.icns` (+ `AppIcon.png` used in the README)
+- Ad-hoc signing changes on every build, so macOS re-asks for microphone permission after each rebuild
 - After changing code, quit the running app first: `pkill -x Cue`
 
 ## Architecture

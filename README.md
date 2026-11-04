@@ -2,6 +2,18 @@
 
 Cue is a small, open-source teleprompter that sits right under your MacBook's camera notch. You can read your script while still looking into the lens, on video calls, in recordings, presentations and live demos.
 
+<p align="center">
+  <img src="Resources/AppIcon.png" width="128" alt="Cue app icon">
+</p>
+
+<p align="center">
+  <a href="https://github.com/jasonzamp/cue/releases/latest/download/Cue.zip">
+    <img src="https://img.shields.io/badge/Download%20Cue%20for%20Mac-%E2%86%93%20Cue.zip-5B6BF9?style=for-the-badge&logo=apple&logoColor=white" alt="Download Cue for Mac">
+  </a>
+  <br>
+  <sub>Free · macOS 13 or later · Apple Silicon and Intel · <a href="https://github.com/jasonzamp/cue/releases">all releases</a></sub>
+</p>
+
 ## Why I built this
 
 I'm a consultant, and a big part of my week is presenting: client meetings, workshops, demos and video calls, often back to back. I wanted to land my key points accurately without glancing at a second screen or looking down at notes, because that breaks eye contact and makes you look less sure of yourself. The teleprompters I tried were either overkill, with extra hardware or separate apps that cover the screen, or they showed up the moment I shared my screen.
@@ -16,6 +28,8 @@ So I built Cue, a tiny teleprompter that lives right under my MacBook's camera. 
 - **Global shortcuts.** They work while Zoom, Teams, Meet or OBS is the active app, and they need no Accessibility permission.
 - **Never steals focus.** Clicking the prompter doesn't take focus from your meeting app.
 - **Adjustable.** You can change the speed, text size, font, width and height. Resize the panel from its edges or with the sliders.
+- **Script history.** Every script you write is saved locally in a history list, and you can reopen or delete any of them.
+- **Click to jump.** Click a paragraph in the editor and the prompter jumps there. The paragraph you're reading stays highlighted.
 - **Menu-bar app.** It has no Dock icon, and your script and settings are saved automatically.
 
 ## Shortcuts
@@ -32,16 +46,42 @@ So I built Cue, a tiny teleprompter that lives right under my MacBook's camera. 
 
 Mouse: click the text to play or pause, scroll to move manually, and hover to show the controls.
 
-## Build & run
+## Install
+
+Cue runs on Macs only (macOS 13 Ventura or later). It doesn't run on Windows or Linux.
+
+1. **Download** [Cue.zip](https://github.com/jasonzamp/cue/releases/latest/download/Cue.zip) and double-click it to unzip.
+2. **Drag `Cue.app` into your Applications folder.**
+3. **Open it the first time.** Cue isn't signed with a paid Apple Developer ID, so macOS blocks the first launch:
+   - **macOS 15 Sequoia or later:** double-click Cue and click **Done** on the warning. Then open **System Settings → Privacy & Security**, scroll down to *"Cue" was blocked…*, click **Open Anyway** and confirm.
+   - **macOS 13–14:** right-click (or Control-click) Cue → **Open** → **Open**.
+
+   You only need to do this once.
+4. **Look at the top of your screen.** Cue lives in the menu bar (there's no Dock icon), and the prompter appears under the camera. The Script & Settings window opens on first launch so you can paste your script.
+5. **Voice mode (optional).** The first time you turn it on, macOS asks for microphone access. Cue only measures how loud the room is, and audio is never recorded or sent anywhere.
+
+Prefer the Terminal? After moving it to Applications, this clears the download flag instead of step 3:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/Cue.app
+```
+
+**Want it on your Desktop or Dock?** Drag Cue from Applications onto the Dock, or hold ⌥⌘ while dragging it to the Desktop to make an alias. To start it at login, add it under System Settings → General → Login Items.
+
+**Uninstall:** quit Cue (✕ on the prompter, or menu bar icon → Quit), then move `Cue.app` to the Bin. Your script and settings are kept in `~/Library/Preferences/io.github.jasonzamp.cue.plist`, so delete that file too if you want them gone.
+
+## Build from source
 
 You need macOS 13 or later and the Xcode Command Line Tools (`xcode-select --install`).
 
 ```bash
-./build.sh
+git clone https://github.com/jasonzamp/cue.git
+cd cue
+./build.sh          # builds a universal Cue.app (Apple Silicon + Intel)
 open Cue.app
 ```
 
-To keep the app, drag `Cue.app` into `/Applications`. If you want it to launch at login, add it under System Settings → General → Login Items.
+`./build.sh --zip` also packages `dist/Cue.zip`, the file attached to each GitHub release. The app icon is drawn in code: `swift scripts/make-icon.swift` regenerates `Resources/AppIcon.icns`.
 
 ## How it works
 

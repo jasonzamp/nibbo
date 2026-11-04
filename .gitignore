@@ -4,3 +4,4 @@ Cue.app/
 *.xcodeproj/
 xcuserdata/
 .DS_Store
+dist/
