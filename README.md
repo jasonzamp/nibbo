@@ -1,17 +1,24 @@
-# Nibbo: a notch teleprompter for macOS
-
-Nibbo is a small, open-source teleprompter that sits right under your MacBook's camera notch. You can read your script while still looking into the lens, on video calls, in recordings, presentations and live demos.
-
 <p align="center">
   <img src="Resources/AppIcon.png" width="128" alt="Nibbo app icon">
 </p>
 
+<h1 align="center">Nibbo</h1>
+
+<p align="center">
+  <b>Your script, right under your camera.</b><br>
+  A tiny Mac teleprompter that keeps your eyes on the lens, so you can present, pitch and video-call with confidence.
+</p>
+
 <p align="center">
   <a href="https://github.com/jasonzamp/nibbo/releases/latest/download/Nibbo.zip">
-    <img src="https://img.shields.io/badge/Download%20Nibbo%20for%20Mac-%E2%86%93%20Nibbo.zip-5B6BF9?style=for-the-badge&logo=apple&logoColor=white" alt="Download Nibbo for Mac">
+    <img src="https://img.shields.io/badge/Download%20Nibbo%20for%20Mac-%E2%86%93%20Nibbo.zip-4B55E8?style=for-the-badge&logo=apple&logoColor=white" alt="Download Nibbo for Mac">
   </a>
   <br>
-  <sub>Free · macOS 13 or later · Apple Silicon and Intel · <a href="https://github.com/jasonzamp/nibbo/releases">all releases</a></sub>
+  <sub>Free and open source · macOS 13 or later · Apple Silicon and Intel · <a href="https://github.com/jasonzamp/nibbo/releases">all releases</a></sub>
+</p>
+
+<p align="center">
+  <img src="screenshots/1-eye-contact.png" alt="Nibbo showing a script under the camera during a video call">
 </p>
 
 ## Why I built this
@@ -19,6 +26,15 @@ Nibbo is a small, open-source teleprompter that sits right under your MacBook's 
 I'm a consultant, and a big part of my week is presenting: client meetings, workshops, demos and video calls, often back to back. I wanted to land my key points accurately without glancing at a second screen or looking down at notes, because that breaks eye contact and makes you look less sure of yourself. The teleprompters I tried were either overkill, with extra hardware or separate apps that cover the screen, or they showed up the moment I shared my screen.
 
 So I built Nibbo, a tiny teleprompter that lives right under my MacBook's camera. My eyes stay on the lens, and the audience sees my slides while only I see my notes. I built it with Claude Code, partly to find out how far AI coding tools can take an idea, from a rough concept to a working native app.
+
+## Screenshots
+
+<p align="center">
+  <a href="screenshots/2-only-you-see-it.png"><img src="screenshots/2-only-you-see-it.png" width="32%" alt="Only you see your notes: your screen shows the prompter, the audience sees only your slides"></a>
+  <a href="screenshots/3-voice-mode.png"><img src="screenshots/3-voice-mode.png" width="32%" alt="Voice mode: the script scrolls while you speak"></a>
+  <a href="screenshots/4-script-library.png"><img src="screenshots/4-script-library.png" width="32%" alt="Script library: history of past scripts and click-to-jump paragraphs"></a>
+</p>
+<p align="center"><sub>Click any screenshot to see it full size.</sub></p>
 
 ## Features
 
